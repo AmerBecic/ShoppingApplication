@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using Caliburn.Micro;
+using DesktopAppUI.Helpers;
 using DesktopAppUI.ViewModels;
 
 namespace DesktopAppUI
@@ -15,6 +17,13 @@ namespace DesktopAppUI
         public Bootstrapper()
         {
             Initialize();
+
+            ConventionManager.AddElementConvention<PasswordBox>(
+        PasswordBoxHelper.BoundPasswordProperty,
+        "Password",
+        "PasswordChanged");
+
+            // other bootstrapper stuff here
         }
 
         protected override void Configure()
