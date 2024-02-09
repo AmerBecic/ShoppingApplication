@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Caliburn.Micro;
+using DesktopAppUI.Helpers;
 
 namespace DesktopAppUI.ViewModels
 {
@@ -11,7 +12,14 @@ namespace DesktopAppUI.ViewModels
     {
         private string _userName = "amer@amerbecic.com";
         private string _password = "Pwd12345.";
+        private IAPIHelper _apiHelper;
+        private IEventAggregator _events;
 
+        public LoginViewModel(IAPIHelper apiHelper, IEventAggregator events)
+        {
+            _apiHelper = apiHelper;
+            _events = events;
+        }
         public string UserName
         {
             get { return _userName; }
@@ -48,23 +56,22 @@ namespace DesktopAppUI.ViewModels
             }
         }
 
-        public void LogIn()
+        public async Task LogIn()
         {
-            Console.WriteLine();
-            //try
-            //{
-            //    ErrorMessage = "";
-            //    var result = await _apiHelper.Authenticate(UserName, Password);
+            try
+            {
+                //ErrorMessage = "";
+                var result = await _apiHelper.Authenticate(UserName, Password);
 
-            //    //Capture more info about user
-            //    await _apiHelper.GetLoggedInUserInfo(result.Access_Token);
+                //Capture more info about user
+                //    await _apiHelper.GetLoggedInUserInfo(result.Access_Token);
 
-            //    _events.PublishOnUIThread(new LogOnEvent());
-            //}
-            //catch (Exception ex)
-            //{
-            //    ErrorMessage = ex.Message;
-            //}
+                //    _events.PublishOnUIThread(new LogOnEvent());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message); //ErrorMessage = ex.Message;
+            }
         }
     }
 }

@@ -32,6 +32,7 @@ namespace DesktopAppUI
 
             _container
                .Singleton<IWindowManager, WindowManager>()
+               .Singleton<IAPIHelper, APIHelper>()
                .Singleton<IEventAggregator, EventAggregator>();
 
             GetType().Assembly.GetTypes()
