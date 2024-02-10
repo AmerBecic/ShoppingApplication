@@ -9,7 +9,7 @@ using DataManager.Library.Models;
 
 namespace DataManager.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Cashier")]
     public class ProductController : ApiController
     {
         [HttpGet]

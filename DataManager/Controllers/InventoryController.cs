@@ -9,8 +9,10 @@ using DataManager.Library.Models;
 
 namespace DataManager.Controllers
 {
+    [Authorize]
     public class InventoryController : ApiController
     {
+        [Authorize(Roles = "Admin,Manager")]
         [HttpGet]
         public List<InventoryModel> Get()
         {
@@ -19,7 +21,7 @@ namespace DataManager.Controllers
             return data.GetInventory();
         }
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public void Post(InventoryModel products)
         {

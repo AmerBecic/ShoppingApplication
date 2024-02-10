@@ -10,9 +10,10 @@ using Microsoft.AspNet.Identity;
 
 namespace DataManager.Controllers
 {
+    [Authorize]
     public class SaleController : ApiController
     {
-        [Authorize]
+        [Authorize(Roles = "Cashier")]
         [HttpPost]
         public void Post(SaleModel sale)
         {
@@ -23,10 +24,12 @@ namespace DataManager.Controllers
             data.SaveSale(sale, userId);
         }
 
+        [Authorize(Roles = "Admin,Manager")]
         [HttpGet]
         [Route("api/Sale/GetSalesReport")]
         public List<SaleReportModel> GetSalesReport()
         {
+            //RequestContext.Principal.IsInRole("Admin");  --->  To check if whoever called this endpoint has Admin role 
             SaleData data = new SaleData();
 
             return data.GetSaleReport();
