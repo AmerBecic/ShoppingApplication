@@ -4,10 +4,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Caliburn.Micro;
 using DesktopAppUI.Library.Api;
 using DesktopAppUI.Library.Helpers;
 using DesktopAppUI.Library.Models;
+using DesktopAppUI.Models;
 
 namespace DesktopAppUI.ViewModels
 {
@@ -16,8 +18,10 @@ namespace DesktopAppUI.ViewModels
         private readonly IProductApi _productApi;
         private readonly ISaleApi _saleApi;
         private readonly IConfigHelper _configHelper;
-        public SalesViewModel(IProductApi productApi, ISaleApi saleApi, IConfigHelper configHelper)
+        private readonly IMapper _mapper;
+        public SalesViewModel(IProductApi productApi, ISaleApi saleApi, IConfigHelper configHelper, IMapper mapper)
         {
+            _mapper = mapper;
             _configHelper = configHelper;
             _productApi = productApi;
             _saleApi = saleApi;
@@ -32,16 +36,17 @@ namespace DesktopAppUI.ViewModels
         private async Task LoadProducts()
         {
             var productList = await _productApi.GetAll();
-            Products = new BindingList<ProductModel>(productList);
+            var products = _mapper.Map<List<ProductDisplayModel>>(productList);
+            Products = new BindingList<ProductDisplayModel>(products);
         }
 
-        private BindingList<ProductModel> _products;
+        private BindingList<ProductDisplayModel> _products;
         private int _productQuantity = 1;
-        private ProductModel _selectedProduct;
-        private BindingList<CartProductModel> _cart = new BindingList<CartProductModel>();
+        private ProductDisplayModel _selectedProduct;
+        private BindingList<CartProductDisplayModel> _cart = new BindingList<CartProductDisplayModel>();
 
 
-        public BindingList<ProductModel> Products
+        public BindingList<ProductDisplayModel> Products
         {
             get { return _products; }
             set
@@ -62,7 +67,7 @@ namespace DesktopAppUI.ViewModels
             }
         }
 
-        public BindingList<CartProductModel> Cart
+        public BindingList<CartProductDisplayModel> Cart
         {
             get { return _cart; }
             set
@@ -71,7 +76,7 @@ namespace DesktopAppUI.ViewModels
                 NotifyOfPropertyChange(() => Cart);
             }
         }
-        public ProductModel SelectedProduct
+        public ProductDisplayModel SelectedProduct
         {
             get { return _selectedProduct; }
             set
@@ -105,7 +110,7 @@ namespace DesktopAppUI.ViewModels
 
         public void AddToCart()
         {
-            CartProductModel existingProduct = Cart.FirstOrDefault(x => x.Product == SelectedProduct);
+            CartProductDisplayModel existingProduct = Cart.FirstOrDefault(x => x.Product == SelectedProduct);
 
             if (existingProduct != null)
             {
@@ -116,7 +121,7 @@ namespace DesktopAppUI.ViewModels
 
             else
             {
-                CartProductModel Product = new CartProductModel
+                CartProductDisplayModel Product = new CartProductDisplayModel
                 {
                     Product = SelectedProduct,
                     QuantityInCart = ProductQuantity

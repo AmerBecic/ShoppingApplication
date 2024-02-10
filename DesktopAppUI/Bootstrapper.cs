@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using AutoMapper;
 using Caliburn.Micro;
 using DesktopAppUI.Helpers;
 using DesktopAppUI.Library.Api;
 using DesktopAppUI.Library.Helpers;
 using DesktopAppUI.Library.Models;
+using DesktopAppUI.Models;
 using DesktopAppUI.ViewModels;
 
 namespace DesktopAppUI
@@ -28,9 +30,23 @@ namespace DesktopAppUI
 
             // other bootstrapper stuff here
         }
+        private IMapper ConfigureAutomapper()
+        {
+            var configMapper = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ProductModel, ProductDisplayModel>();
+                cfg.CreateMap<CartProductModel, CartProductDisplayModel>();
+            });
+
+            var mapper = configMapper.CreateMapper();
+
+            return mapper;
+        }
 
         protected override void Configure()
         {
+            _container.Instance<IMapper>(ConfigureAutomapper());
+
             _container.Instance(_container)
                 .PerRequest<ISaleApi, SaleApi>()
                 .PerRequest<IProductApi, ProductApi>();
