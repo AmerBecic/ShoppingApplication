@@ -26,6 +26,12 @@ namespace DesktopAppUI.ViewModels
         }
 
         public BindingList<ApplicationUserModel> _users;
+        private ApplicationUserModel _selectedUser;
+        private string _selectedUserName;
+        private string _selectedUserRole;
+        private string _selectedAvaialbeRole;
+        private BindingList<string> _userRoles = new BindingList<string>();
+        private BindingList<string> _availableRoles = new BindingList<string>();
         protected override async void OnViewLoaded(object view)
         {
             base.OnViewLoaded(view);
@@ -59,18 +65,18 @@ namespace DesktopAppUI.ViewModels
             Users = new BindingList<ApplicationUserModel>(usersList);
         }
 
-        //private async Task LoadAvailableRoles()
-        //{
-        //    var roles = await _userApi.GetAllRoles();
+        private async Task LoadAvailableRoles()
+        {
+            var roles = await _userApi.GetAllRoles();
 
-        //    foreach (var role in roles)
-        //    {
-        //        if (UserRoles.IndexOf(role.Value) < 0)
-        //        {
-        //            AvailableRoles.Add(role.Value);
-        //        }
-        //    }
-        //}
+            foreach (var role in roles)
+            {
+                if (UserRoles.IndexOf(role.Value) < 0)
+                {
+                    AvailableRoles.Add(role.Value);
+                }
+            }
+        }
 
         public BindingList<ApplicationUserModel> Users
         {
@@ -82,97 +88,87 @@ namespace DesktopAppUI.ViewModels
             }
         }
 
-        //private ApplicationUserModel _selectedUser;
+        public ApplicationUserModel SelectedUser
+        {
+            get { return _selectedUser; }
+            set
+            {
+                _selectedUser = value;
+                SelectedUserName = _selectedUser.Email;
+                UserRoles = new BindingList<string>(_selectedUser.Roles.Select(x => x.Value).ToList());
+                LoadAvailableRoles();
+                NotifyOfPropertyChange(() => SelectedUser);
+            }
+        }
 
-        //public ApplicationUserModel SelectedUser
-        //{
-        //    get { return _selectedUser; }
-        //    set
-        //    {
-        //        _selectedUser = value;
-        //        SelectedUserName = _selectedUser.Email;
-        //        UserRoles = new BindingList<string>(_selectedUser.Roles.Select(x => x.Value).ToList());
-        //        LoadAvailableRoles();
-        //        NotifyOfPropertyChange(() => SelectedUser);
-        //    }
-        //}
+        public string SelectedUserRole
+        {
+            get { return _selectedUserRole; }
+            set
+            {
+                _selectedUserRole = value;
+                NotifyOfPropertyChange(() => SelectedUserRole);
+            }
+        }
 
-        //private string _selectedUserRole;
+        public string SelectedAvailableRole
+        {
+            get { return _selectedAvaialbeRole; }
+            set
+            {
+                _selectedAvaialbeRole = value;
+                NotifyOfPropertyChange(() => SelectedAvailableRole);
+            }
+        }
 
-        //public string SelectedUserRole
-        //{
-        //    get { return _selectedUserRole; }
-        //    set
-        //    {
-        //        _selectedUserRole = value;
-        //        NotifyOfPropertyChange(() => SelectedUserRole);
-        //    }
-        //}
+        public string SelectedUserName
+        {
+            get
+            {
+                return _selectedUserName;
+            }
+            set
+            {
+                _selectedUserName = value;
+                NotifyOfPropertyChange(() => SelectedUserName);
+            }
+        }
 
-        //private string _selectedAvaialbeRole;
-        //public string SelectedAvailableRole
-        //{
-        //    get { return _selectedAvaialbeRole; }
-        //    set
-        //    {
-        //        _selectedAvaialbeRole = value;
-        //        NotifyOfPropertyChange(() => SelectedAvailableRole);
-        //    }
-        //}
+        public BindingList<string> UserRoles
+        {
+            get { return _userRoles; }
+            set
+            {
+                _userRoles = value;
+                NotifyOfPropertyChange(() => UserRoles);
+            }
+        }
 
-        //private string _selectedUserName;
+        public BindingList<string> AvailableRoles
+        {
+            get { return _availableRoles; }
+            set
+            {
+                _availableRoles = value;
+                NotifyOfPropertyChange(() => AvailableRoles);
+            }
+        }
 
-        //public string SelectedUserName
-        //{
-        //    get
-        //    {
-        //        return _selectedUserName;
-        //    }
-        //    set
-        //    {
-        //        _selectedUserName = value;
-        //        NotifyOfPropertyChange(() => SelectedUserName);
-        //    }
-        //}
+        public async void AddSelectedRole()
+        {
+            await _userApi.AddRoleToUser(SelectedUser.Id, SelectedAvailableRole);
 
-        //private BindingList<string> _userRoles = new BindingList<string>();
+            UserRoles.Add(SelectedAvailableRole);
+            AvailableRoles.Remove(SelectedAvailableRole);
 
-        //public BindingList<string> UserRoles
-        //{
-        //    get { return _userRoles; }
-        //    set
-        //    {
-        //        _userRoles = value;
-        //        NotifyOfPropertyChange(() => UserRoles);
-        //    }
-        //}
+        }
 
-        //private BindingList<string> _availableRoles = new BindingList<string>();
-        //public BindingList<string> AvailableRoles
-        //{
-        //    get { return _availableRoles; }
-        //    set
-        //    {
-        //        _availableRoles = value;
-        //        NotifyOfPropertyChange(() => AvailableRoles);
-        //    }
-        //}
+        public async void RemoveSelectedRole()
+        {
+            await _userApi.RemoveRoleFromUser(SelectedUser.Id, SelectedUserRole);
 
-        //public async void AddSelectedRole()
-        //{
-        //    await _userApi.AddRoleToUser(SelectedUser.Id, SelectedAvailableRole);
-
-        //    UserRoles.Add(SelectedAvailableRole);
-        //    AvailableRoles.Remove(SelectedAvailableRole);
-
-        //}
-
-        //public async void RemoveSelectedRole()
-        //{
-        //    await _userApi.RemoveRoleFromUser(SelectedUser.Id, SelectedUserRole);
-
-        //    AvailableRoles.Add(SelectedUserRole);
-        //    UserRoles.Remove(SelectedUserRole);
-        //}
+            AvailableRoles.Add(SelectedUserRole);
+            UserRoles.Remove(SelectedUserRole);
+        }
     }
 }

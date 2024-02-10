@@ -33,46 +33,46 @@ namespace DesktopAppUI.Library.Api
             }
         }
 
-        //public async Task<Dictionary<string, string>> GetAllRoles()
-        //{
-        //    using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync("/api/User/Admin/GetAllRoles"))
-        //    {
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            var result = await response.Content.ReadAsAsync<Dictionary<string, string>>();
-        //            return result;
-        //        }
-        //        else
-        //        {
-        //            throw new Exception(response.ReasonPhrase);
-        //        }
-        //    }
-        //}
+        public async Task<Dictionary<string, string>> GetAllRoles()
+        {
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync("/api/User/Admin/GetAllRoles"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadAsAsync<Dictionary<string, string>>();
+                    return result;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
 
-        //public async Task AddRoleToUser(string userId, string roleName)
-        //{
-        //    var data = new { userId = userId, roleName = roleName };
+        public async Task AddRoleToUser(string userId, string roleName)
+        {
+            var data = new { userId = userId, roleName = roleName };
 
-        //    using (HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync("/api/User/Admin/AddRoleToUser", data))
-        //    {
-        //        if (response.IsSuccessStatusCode == false)
-        //        {
-        //            throw new Exception(response.ReasonPhrase);
-        //        }
-        //    }
-        //}
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync("/api/User/Admin/AddRoleToUser", data))
+            {
+                if (response.IsSuccessStatusCode == false)
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
 
-        //public async Task RemoveRoleFromUser(string userId, string roleName)
-        //{
-        //    var data = new { userId = userId, roleName = roleName };
+        public async Task RemoveRoleFromUser(string userId, string roleName)
+        {
+            var data = new { userId = userId, roleName = roleName };
 
-        //    using (HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync("/api/User/Admin/RemoveRoleFromUser", data))
-        //    {
-        //        if (response.IsSuccessStatusCode == false)
-        //        {
-        //            throw new Exception(response.ReasonPhrase);
-        //        }
-        //    }
-        //}
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync("/api/User/Admin/RemoveRoleFromUser", data))
+            {
+                if (response.IsSuccessStatusCode == false)
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
     }
 }
