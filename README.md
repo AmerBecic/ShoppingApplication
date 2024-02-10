@@ -4,7 +4,7 @@ This is a demo for a Shopping app.
 
 Having accumulated 2 years of experience with the MVC design pattern, I've chosen to embark on a challenging journey to explore and construct something using the MVVM architecture in .Net Framework. <br/>
 
-**At the moment application is getting upgraded to use .Net Core**.
+## **At the moment application is getting upgraded to use .Net Core**. ##
 
 Looking ahead, I intend to also further develop this application using the MVC.
 
