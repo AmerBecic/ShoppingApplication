@@ -14,11 +14,13 @@ namespace DesktopAppUI.ViewModels
     public class SalesViewModel : Screen
     {
         private readonly IProductApi _productApi;
+        private readonly ISaleApi _saleApi;
         private readonly IConfigHelper _configHelper;
-        public SalesViewModel(IProductApi productApi, IConfigHelper configHelper)
+        public SalesViewModel(IProductApi productApi, ISaleApi saleApi, IConfigHelper configHelper)
         {
             _configHelper = configHelper;
             _productApi = productApi;
+            _saleApi = saleApi;
         }
 
         protected override async void OnViewLoaded(object view)
@@ -127,7 +129,25 @@ namespace DesktopAppUI.ViewModels
             NotifyOfPropertyChange(() => SubTotal);
             NotifyOfPropertyChange(() => Tax);
             NotifyOfPropertyChange(() => Total);
-            //NotifyOfPropertyChange(() => CanCheckOut);
+            NotifyOfPropertyChange(() => CanCheckOut);
+        }
+
+        public async Task CheckOut()
+        {
+            //Create a SaleModel and post to the API
+            SaleModel sale = new SaleModel();
+            foreach (var product in Cart)
+            {
+                sale.SaleDetails.Add(new SaleDetailModel
+                {
+                    ProductId = product.Product.Id,
+                    Quantity = product.QuantityInCart
+                });
+            }
+
+            await _saleApi.PostSale(sale);
+
+            //await ResetSalesViewModel();
         }
 
         public bool CanAddToCart

@@ -5,6 +5,6 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
-	SELECT Id, ProductName, [Description], RetailPrice FROM [dbo].[Product]
+	SELECT Id, ProductName, [Description], RetailPrice, QuantityInStock, IsTaxable FROM [dbo].[Product]
 	WHERE Id = @Id;
 END
