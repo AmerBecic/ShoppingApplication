@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Caliburn.Micro;
 using DesktopAppUI.Helpers;
+using DesktopAppUI.Library.Api;
 
 namespace DesktopAppUI.ViewModels
 {
@@ -91,7 +92,7 @@ namespace DesktopAppUI.ViewModels
                 var result = await _apiHelper.Authenticate(UserName, Password);
 
                 //Capture more info about user
-                //    await _apiHelper.GetLoggedInUserInfo(result.Access_Token);
+                await _apiHelper.GetLoggedInUserInfo(result.Access_Token);
 
                 //    _events.PublishOnUIThread(new LogOnEvent());
             }

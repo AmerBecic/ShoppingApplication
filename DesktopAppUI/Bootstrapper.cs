@@ -7,6 +7,8 @@ using System.Windows;
 using System.Windows.Controls;
 using Caliburn.Micro;
 using DesktopAppUI.Helpers;
+using DesktopAppUI.Library.Api;
+using DesktopAppUI.Library.Models;
 using DesktopAppUI.ViewModels;
 
 namespace DesktopAppUI
@@ -32,8 +34,10 @@ namespace DesktopAppUI
 
             _container
                .Singleton<IWindowManager, WindowManager>()
+               .Singleton<IEventAggregator, EventAggregator>()
                .Singleton<IAPIHelper, APIHelper>()
-               .Singleton<IEventAggregator, EventAggregator>();
+               .Singleton<ILoggedInUserModel, LoggedInUserModel>();
+
 
             GetType().Assembly.GetTypes()
              .Where(type => type.IsClass)
