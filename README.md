@@ -19,7 +19,7 @@ Future plan is to implement Dependency Injection system into API.
 
 Technologies used:
 
-- .Net MVVM (in future MVC)
+- .Net Core MVVM (in future MVC)
 - Dapper and EF
 - SQL
 - Git
