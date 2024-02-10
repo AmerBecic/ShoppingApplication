@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using AutoMapper;
 using Caliburn.Micro;
 using DesktopAppUI.Library.Api;
@@ -19,18 +21,45 @@ namespace DesktopAppUI.ViewModels
         private readonly ISaleApi _saleApi;
         private readonly IConfigHelper _configHelper;
         private readonly IMapper _mapper;
-        public SalesViewModel(IProductApi productApi, ISaleApi saleApi, IConfigHelper configHelper, IMapper mapper)
+        private readonly StatusInfoViewModel _statusInfo;
+        private readonly IWindowManager _window;
+        public SalesViewModel(IProductApi productApi, ISaleApi saleApi, IConfigHelper configHelper, IMapper mapper, IWindowManager window, StatusInfoViewModel statusInfo)
         {
             _mapper = mapper;
             _configHelper = configHelper;
             _productApi = productApi;
             _saleApi = saleApi;
+            _statusInfo = statusInfo;
+            _window = window;
         }
 
         protected override async void OnViewLoaded(object view)
         {
             base.OnViewLoaded(view);
-            await LoadProducts();
+            try
+            {
+                await LoadProducts();
+            }
+            catch (Exception ex)
+            {
+                dynamic settings = new ExpandoObject();
+                settings.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                settings.ResizeMode = ResizeMode.NoResize;
+                settings.Title = "System Error";
+
+                if (ex.Message == "Unauthorized")
+                {
+                    _statusInfo.UpdateMessage("Unauthorized Access", "You do not have permission to interact with the Sales Form");
+                    _window.ShowDialog(_statusInfo, null, settings);
+                }
+                else
+                {
+                    _statusInfo.UpdateMessage("Fatal Exception", ex.Message);
+                    _window.ShowDialog(_statusInfo, null, settings);
+                }
+
+                TryClose();
+            }
         }
 
         private async Task LoadProducts()
