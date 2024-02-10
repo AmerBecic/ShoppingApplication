@@ -9,5 +9,6 @@ namespace DesktopAppUI.Library.Api
         HttpClient ApiClient { get; }
         Task<AuthenticatedUser> Authenticate(string username, string password);
         Task GetLoggedInUserInfo(string token);
+        void LogOffUser();
     }
 }

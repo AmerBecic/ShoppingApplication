@@ -37,6 +37,11 @@ namespace DesktopAppUI.Library.Api
             _apiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
+        public void LogOffUser()
+        {
+            _apiClient.DefaultRequestHeaders.Clear();
+        }
+
         public async Task<AuthenticatedUser> Authenticate(string username, string password)
         {
             var data = new FormUrlEncodedContent(new[]

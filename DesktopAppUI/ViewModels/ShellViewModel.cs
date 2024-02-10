@@ -47,7 +47,7 @@ namespace DesktopAppUI.ViewModels
         public void LogOut()
         {
             _user.ResetUserModel();
-            //_apiHelper.LogOffUser();
+            _apiHelper.LogOffUser();
             ActivateItem(IoC.Get<LoginViewModel>());
             NotifyOfPropertyChange(() => IsUserLoggedIn);
         }
