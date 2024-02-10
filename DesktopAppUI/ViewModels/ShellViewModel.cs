@@ -21,8 +21,7 @@ namespace DesktopAppUI.ViewModels
 
             _events.Subscribe(this);
 
-            //ActivateItem(IoC.Get<LoginViewModel>());
-            ActivateItem(_container.GetInstance<LoginViewModel>());
+            ActivateItem(IoC.Get<LoginViewModel>());
         }
 
         public void Handle(LogOnEvent message)
