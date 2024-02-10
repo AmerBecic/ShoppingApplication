@@ -15,14 +15,14 @@ namespace DesktopAppUI.Library.Models
         public string EmailAdress { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        //public void ResetUserModel()
-        //{
-        //    Token = "";
-        //    Id = "";
-        //    FirstName = "";
-        //    LastName = "";
-        //    EmailAdress = "";
-        //    CreatedDate = DateTime.MinValue;
-        //}
+        public void ResetUserModel()
+        {
+            Token = "";
+            Id = "";
+            FirstName = "";
+            LastName = "";
+            EmailAdress = "";
+            CreatedDate = DateTime.MinValue;
+        }
     }
 }

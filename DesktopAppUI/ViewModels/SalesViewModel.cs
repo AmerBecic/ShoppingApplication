@@ -40,6 +40,18 @@ namespace DesktopAppUI.ViewModels
             Products = new BindingList<ProductDisplayModel>(products);
         }
 
+        private async Task ResetSalesViewModel()
+        {
+            Cart = new BindingList<CartProductDisplayModel>();
+
+            await LoadProducts();
+
+            NotifyOfPropertyChange(() => SubTotal);
+            NotifyOfPropertyChange(() => Tax);
+            NotifyOfPropertyChange(() => Total);
+            NotifyOfPropertyChange(() => CanCheckOut);
+        }
+
         private BindingList<ProductDisplayModel> _products;
         private int _productQuantity = 1;
         private ProductDisplayModel _selectedProduct;
@@ -164,7 +176,7 @@ namespace DesktopAppUI.ViewModels
 
             await _saleApi.PostSale(sale);
 
-            //await ResetSalesViewModel();
+            await ResetSalesViewModel();
         }
 
         public bool CanAddToCart
