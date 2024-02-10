@@ -44,7 +44,7 @@ namespace DesktopAppUI.ViewModels
         private int _productQuantity = 1;
         private ProductDisplayModel _selectedProduct;
         private BindingList<CartProductDisplayModel> _cart = new BindingList<CartProductDisplayModel>();
-
+        private CartProductDisplayModel _selectedCartProduct;
 
         public BindingList<ProductDisplayModel> Products
         {
@@ -76,6 +76,18 @@ namespace DesktopAppUI.ViewModels
                 NotifyOfPropertyChange(() => Cart);
             }
         }
+
+
+        public CartProductDisplayModel SelectedCartProduct
+        {
+            get { return _selectedCartProduct; }
+            set
+            {
+                _selectedCartProduct = value;
+                NotifyOfPropertyChange(() => SelectedCartProduct);
+                NotifyOfPropertyChange(() => CanRemoveFromCart);
+            }
+        }
         public ProductDisplayModel SelectedProduct
         {
             get { return _selectedProduct; }
@@ -89,17 +101,17 @@ namespace DesktopAppUI.ViewModels
 
         public void RemoveFromCart()
         {
-            //SelectedCartProduct.Product.QuantityInStock += 1;
+            SelectedCartProduct.Product.QuantityInStock += 1;
 
-            //if (SelectedCartProduct.QuantityInCart > 1)
-            //{
-            //    SelectedCartProduct.QuantityInCart -= 1;
-            //}
+            if (SelectedCartProduct.QuantityInCart > 1)
+            {
+                SelectedCartProduct.QuantityInCart -= 1;
+            }
 
-            //else
-            //{
-            //    Cart.Remove(SelectedCartProduct);
-            //}
+            else
+            {
+                Cart.Remove(SelectedCartProduct);
+            }
 
             NotifyOfPropertyChange(() => SubTotal);
             NotifyOfPropertyChange(() => Tax);
@@ -179,10 +191,10 @@ namespace DesktopAppUI.ViewModels
             {
                 bool output = false;
 
-                //if (SelectedCartProduct != null && SelectedCartProduct?.QuantityInCart > 0)
-                //{
-                //    output = true;
-                //}
+                if (SelectedCartProduct != null && SelectedCartProduct?.QuantityInCart > 0)
+                {
+                    output = true;
+                }
 
                 return output;
             }
