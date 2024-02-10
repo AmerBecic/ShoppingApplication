@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Caliburn.Micro;
+using DesktopAppUI.EventModels;
 using DesktopAppUI.Helpers;
 using DesktopAppUI.Library.Api;
 
@@ -94,7 +95,7 @@ namespace DesktopAppUI.ViewModels
                 //Capture more info about user
                 await _apiHelper.GetLoggedInUserInfo(result.Access_Token);
 
-                //    _events.PublishOnUIThread(new LogOnEvent());
+                _events.PublishOnUIThread(new LogOnEvent());
             }
             catch (Exception ex)
             {
