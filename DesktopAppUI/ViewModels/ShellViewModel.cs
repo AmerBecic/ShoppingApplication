@@ -44,6 +44,11 @@ namespace DesktopAppUI.ViewModels
             }
         }
 
+        public void UserManagement()
+        {
+            ActivateItem(IoC.Get<UserViewModel>());
+        }
+
         public void LogOut()
         {
             _user.ResetUserModel();

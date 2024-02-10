@@ -48,6 +48,7 @@ namespace DesktopAppUI
             _container.Instance<IMapper>(ConfigureAutomapper());
 
             _container.Instance(_container)
+                .PerRequest<IUserApi, UserApi>()
                 .PerRequest<ISaleApi, SaleApi>()
                 .PerRequest<IProductApi, ProductApi>();
 

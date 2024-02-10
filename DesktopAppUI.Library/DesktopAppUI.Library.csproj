@@ -52,10 +52,13 @@
     <Compile Include="Api\IAPIHelper.cs" />
     <Compile Include="Api\IProductApi.cs" />
     <Compile Include="Api\ISaleApi.cs" />
+    <Compile Include="Api\IUserApi.cs" />
     <Compile Include="Api\ProductApi.cs" />
     <Compile Include="Api\SaleApi.cs" />
+    <Compile Include="Api\UserApi.cs" />
     <Compile Include="Helpers\ConfigHelper.cs" />
     <Compile Include="Helpers\IConfigHelper.cs" />
+    <Compile Include="Models\ApplicationUserModel.cs" />
     <Compile Include="Models\AuthenticatedUser.cs" />
     <Compile Include="Models\CartProductModel.cs" />
     <Compile Include="Models\ILoggedInUserModel.cs" />
