@@ -6,7 +6,7 @@ Having accumulated 2 years of experience with the MVC design pattern, I've chose
 
 ## **At the moment application is getting upgraded to use .Net Core**. ##
 
-Looking ahead, I intend to also further develop this application using the MVC.
+Looking ahead, I intend to also further develop this application using the MVC design pattern
 
 ## Description
 
