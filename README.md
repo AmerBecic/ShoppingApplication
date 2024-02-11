@@ -35,8 +35,12 @@ Technologies used:
 <img src="/README-pics/LogIn.png" width="500">
 
 - SalesPage:
-<img src="/README-pics/SalesPage1.png" width="500">
-<img src="/README-pics/SalesPage2.png" width="500">
+<p float="left">
+  <img src="/README-pics/SalesPage1.png" height="280" width="48%"/>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="/README-pics/SalesPage2.png" height="280" width="48%"/>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</p>
 
 - Structure:
 <img src="/README-pics/Structure.png" width="500">
