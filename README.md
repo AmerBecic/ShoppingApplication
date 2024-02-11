@@ -29,10 +29,10 @@ Technologies used:
 <br/>
 
 - Endpoints:
-<img src="/README-pics/Endpoints.png">
+<img src="/README-pics/Endpoints.png" />
 
 - LogIn:
-<img src="/README-pics/LogIn.png" width="500">
+<img src="/README-pics/LogIn.png" width="500" />
 
 - SalesPage:
 <p float="left">
@@ -42,5 +42,8 @@ Technologies used:
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
 
+- Users Administration:
+<img src="/README-pics/UserAdministration.png" />
+
 - Structure:
-<img src="/README-pics/Structure.png" width="500">
+<img src="/README-pics/Structure.png" width="500" />
