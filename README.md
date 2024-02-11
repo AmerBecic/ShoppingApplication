@@ -23,7 +23,10 @@ Technologies used:
 - Dapper and EF
 - SQL
 - Git
-- Bootstrap
+- Bootstrap 
+
+<br/>
+<br/>
 
 - Endpoints:
 <img src="/README-pics/Endpoints.png">
