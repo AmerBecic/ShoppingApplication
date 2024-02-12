@@ -13,10 +13,6 @@ Looking ahead, I intend to also further develop this application using the MVC d
 Again this is a demo, with MVP bulding style. Main focus is on the functionalities of backend part of the application. <br/>
 I do have plans to improve Frontend part of the application, but probably not in a near future.
 
-Currently only UI part of the app has Dependency Injection built into it. <br/>
-Future plan is to implement Dependency Injection system into API.
-
-
 Technologies used:
 
 - .Net Core MVVM (in future MVC)
@@ -24,7 +20,7 @@ Technologies used:
 - SQL
 - Git
 - Bootstrap 
-
+<!---
 <br/>
 <br/>
 
@@ -47,3 +43,4 @@ Technologies used:
 
 - Structure:
 <img src="/README-pics/Structure.png" width="500" />
+-->
