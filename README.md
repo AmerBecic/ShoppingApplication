@@ -1,5 +1,5 @@
 # Shopping App
-This is a demo for a Shopping app.  (refrence to legacy repository for more context: https://github.com/AmerBecic/ShoppingAppLegacy )
+This is a demo for a Shopping app.  (refrence to legacy repository to see how it was built step by step from scratch: https://github.com/AmerBecic/ShoppingAppLegacy )
 
 
 Having accumulated 2 years of experience with the MVC design pattern, I've chosen to embark on a challenging journey to explore and construct something using the MVVM architecture in .Net Framework. <br/>
