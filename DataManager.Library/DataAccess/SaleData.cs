@@ -5,18 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using DataManager.Library.Internal.DataAccess;
 using DataManager.Library.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace DataManager.Library.DataAccess
 {
     public class SaleData
     {
+        private readonly IConfiguration _config;
+
+        public SaleData(IConfiguration config)
+        {
+            _config = config;
+        }
         public void SaveSale(SaleModel saleInfo, string cashierId)
         {
             //TODO make this SOLID, split into parts!!!
 
             //Start filling in the models we will save to the DB
             List<SaleDetailDBModel> details = new List<SaleDetailDBModel>();
-            ProductData products = new ProductData();
+            ProductData products = new ProductData(_config);
             decimal taxRate = ConfigHelper.GetTaxRate();
 
             foreach (var product in saleInfo.SaleDetails)
@@ -53,7 +60,7 @@ namespace DataManager.Library.DataAccess
             };
             sale.Total = sale.SubTotal + sale.Tax;
 
-            using (SqlDataAccess sql = new SqlDataAccess())
+            using (SqlDataAccess sql = new SqlDataAccess(_config))
             {
                 try
                 {
@@ -82,7 +89,7 @@ namespace DataManager.Library.DataAccess
         }
         public List<SaleReportModel> GetSaleReport()
         {
-            SqlDataAccess sql = new SqlDataAccess();
+            SqlDataAccess sql = new SqlDataAccess(_config);
 
             var output = sql.LoadData<SaleReportModel, dynamic>("dbo.spSale_SaleReport", new { }, "AppData");
 

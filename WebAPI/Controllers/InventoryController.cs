@@ -7,6 +7,7 @@ using DataManager.Library.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace WebAPI.Controllers
 {
@@ -15,11 +16,17 @@ namespace WebAPI.Controllers
     [Authorize]
     public class InventoryController : ControllerBase
     {
+        private readonly IConfiguration _config;
+
+        public InventoryController(IConfiguration config)
+        {
+            _config = config;
+        }
             [Authorize(Roles = "Admin,Manager")]
             [HttpGet]
             public List<InventoryModel> Get()
             {
-                InventoryData data = new InventoryData();
+                InventoryData data = new InventoryData(_config);
 
                 return data.GetInventory();
             }
@@ -28,7 +35,7 @@ namespace WebAPI.Controllers
             [HttpPost]
             public void Post(InventoryModel products)
             {
-                InventoryData data = new InventoryData();
+                InventoryData data = new InventoryData(_config);
 
                 data.SaveInventoryRecord(products);
             }
