@@ -45,7 +45,7 @@ namespace WebAPI.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        [Route("api/User/Admin/GetAllUsers")]
+        [Route("Admin/GetAllUsers")]
         public List<ApplicationUserModel> GetAllUsers()
         {
             List<ApplicationUserModel> output = new List<ApplicationUserModel>();
@@ -80,7 +80,7 @@ namespace WebAPI.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        [Route("api/User/Admin/GetAllRoles")]
+        [Route("Admin/GetAllRoles")]
         public Dictionary<string, string> GetAllRoles()
         {
                 var roles = _context.Roles.ToDictionary(x => x.Id, x => x.Name);
@@ -90,7 +90,7 @@ namespace WebAPI.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        [Route("api/User/Admin/AddRoleToUser")]
+        [Route("Admin/AddRoleToUser")]
         public async Task AddRoleToUser(UserRolePairModel userRolePair)
         {
            var user = await _userManager.FindByIdAsync(userRolePair.UserId);
@@ -100,7 +100,7 @@ namespace WebAPI.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        [Route("api/User/Admin/RemoveRoleFromUser")]
+        [Route("Admin/RemoveRoleFromUser")]
         public async Task RemoveRoleFromUser(UserRolePairModel userRolePair)
         {
             var user = await _userManager.FindByIdAsync(userRolePair.UserId);

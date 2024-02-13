@@ -66,18 +66,33 @@ namespace WebAPI.Controllers
                 claims.Add(new Claim(ClaimTypes.Role, role.Name));
             }
 
-            var token = new JwtSecurityToken(
-                new JwtHeader(
-                    new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SecretKey")), SecurityAlgorithms.HmacSha256)), //Signing (not ecrypting) with HmacSha256 algo ("SecretKey is coded into Bytes) and uses those bytes as key to sign token
-                new JwtPayload(claims));
-
-            var output = new
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Access_Token = new JwtSecurityTokenHandler().WriteToken(token),
-                UserName = username
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.UtcNow.AddDays(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes("YourLongAndSecureSecretKey")), SecurityAlgorithms.HmacSha256),
+                IssuedAt = DateTime.UtcNow
             };
 
-            return output;
+            var tokenHandler = new JwtSecurityTokenHandler();
+            try
+            {
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+                var output = new
+                {
+                    Access_Token = new JwtSecurityTokenHandler().WriteToken(token),
+                    UserName = username
+                };
+
+                return output;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error creating token: {ex.Message}");
+                return null;
+            }
+            
+
         }
     }
 }

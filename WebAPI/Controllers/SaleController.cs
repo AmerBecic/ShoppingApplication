@@ -36,7 +36,7 @@ namespace WebAPI.Controllers
 
         [Authorize(Roles = "Admin,Manager")]
         [HttpGet]
-        [Route("api/Sale/GetSalesReport")]
+        [Route("GetSalesReport")]
         public List<SaleReportModel> GetSalesReport()
         {
             //RequestContext.Principal.IsInRole("Admin");  --->  To check if whoever called this endpoint has Admin role 
