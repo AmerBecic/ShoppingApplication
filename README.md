@@ -20,7 +20,7 @@ Technologies used:
 - SQL
 - Git
 - Bootstrap 
-<!---
+
 <br/>
 <br/>
 
@@ -43,4 +43,4 @@ Technologies used:
 
 - Structure:
 <img src="/README-pics/Structure.png" width="500" />
--->
+
