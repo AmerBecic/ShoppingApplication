@@ -1,12 +1,9 @@
 # Shopping App
-This is a demo for a Shopping app.  (refrence to legacy repository to see how it was built step by step from scratch: https://github.com/AmerBecic/ShoppingAppLegacy )
+This is a demo for a Shopping app.
 
+This is .Net Core version of https://github.com/AmerBecic/ShoppingAppLegacy
 
-Having accumulated 2 years of experience with the MVC design pattern, I've chosen to embark on a challenging journey to explore and construct something using the MVVM architecture in .Net Framework. <br/>
-
-## **At the moment application is getting upgraded to use .Net Core**. ##
-
-.Net Core version of the app will use MVC design pattern.
+Previous version was build in .Net Framework, while this is that same project upgraded to .Net Core
 
 ## Description
 
