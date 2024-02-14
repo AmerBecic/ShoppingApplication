@@ -15,7 +15,7 @@ I do have plans to improve Frontend part of the application, but probably not in
 
 Technologies used:
 
-- .Net Core MVVM (in future MVC)
+- .Net Core MVC & MVVM
 - Dapper and EF
 - SQL
 - Git
