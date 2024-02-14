@@ -3,7 +3,7 @@ This is a demo for a Shopping app.
 
 This is .Net Core version of https://github.com/AmerBecic/ShoppingAppLegacy
 
-Previous version was build in .Net Framework, while this is that same project upgraded to .Net Core
+Previous version was built in .Net Framework, while this is that same project upgraded to .Net Core
 
 ## Description
 
