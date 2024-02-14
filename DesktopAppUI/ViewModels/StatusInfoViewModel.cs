@@ -23,7 +23,7 @@ namespace DesktopAppUI.ViewModels
 
         public void Close()
         {
-            TryClose(); //closes this form not the entire app
+            TryCloseAsync(); //closes this form not the entire app
         }
     }
 }

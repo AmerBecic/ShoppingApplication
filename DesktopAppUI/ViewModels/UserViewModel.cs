@@ -49,14 +49,14 @@ namespace DesktopAppUI.ViewModels
                 if (ex.Message == "Unauthorized")
                 {
                     _statusInfo.UpdateMessage("Unauthorized Access", "You do not have permission to interact with the Sales Form");
-                    _window.ShowDialog(_statusInfo, null, settings);
+                    await _window.ShowDialogAsync(_statusInfo, null, settings);
                 }
                 else
                 {
                     _statusInfo.UpdateMessage("Fatal Exception", ex.Message);
-                    _window.ShowDialog(_statusInfo, null, settings);
+                   await _window.ShowDialogAsync(_statusInfo, null, settings);
                 }
-                TryClose();
+                TryCloseAsync();
             }
         }
         private async Task LoadUsers()
