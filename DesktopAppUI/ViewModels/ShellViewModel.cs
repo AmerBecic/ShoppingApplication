@@ -14,13 +14,11 @@ namespace DesktopAppUI.ViewModels
     public class ShellViewModel : Conductor<object>, IHandle<LogOnEvent>
     {
         private IEventAggregator _events;
-        private SalesViewModel _salesVM;
         private SimpleContainer _container;
         private ILoggedInUserModel _user;
         private IAPIHelper _apiHelper;
-        public ShellViewModel(IEventAggregator events, LoginViewModel loginVM, SalesViewModel salesVM, SimpleContainer container, ILoggedInUserModel user, IAPIHelper apiHelper)
+        public ShellViewModel(IEventAggregator events, LoginViewModel loginVM, SimpleContainer container, ILoggedInUserModel user, IAPIHelper apiHelper)
         {
-            _salesVM = salesVM;
             _events = events;
             _container = container;
             _user = user;
@@ -63,15 +61,9 @@ namespace DesktopAppUI.ViewModels
              TryCloseAsync();
         }
 
-        //public void Handle(LogOnEvent message)
-        //{
-        //    ActivateItem(_salesVM);
-        //    NotifyOfPropertyChange(() => IsUserLoggedIn);
-        //}
-
         public async Task HandleAsync(LogOnEvent message, CancellationToken cancellationToken)
         {
-            await ActivateItemAsync(_salesVM, cancellationToken);
+            await ActivateItemAsync(IoC.Get<SalesViewModel>(), new CancellationToken());
             NotifyOfPropertyChange(() => IsUserLoggedIn);
         }
     }
