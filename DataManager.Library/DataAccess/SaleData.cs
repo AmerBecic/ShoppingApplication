@@ -9,13 +9,15 @@ using Microsoft.Extensions.Configuration;
 
 namespace DataManager.Library.DataAccess
 {
-    public class SaleData
+    public class SaleData : ISaleData
     {
-        private readonly IConfiguration _config;
+        private readonly ISqlDataAccess _sqlDataAccess;
+        private readonly IProductData _productData;
 
-        public SaleData(IConfiguration config)
+        public SaleData(ISqlDataAccess sqlDataAccess, IProductData productData)
         {
-            _config = config;
+            _sqlDataAccess = sqlDataAccess;
+            _productData = productData;
         }
         public void SaveSale(SaleModel saleInfo, string cashierId)
         {
@@ -23,7 +25,6 @@ namespace DataManager.Library.DataAccess
 
             //Start filling in the models we will save to the DB
             List<SaleDetailDBModel> details = new List<SaleDetailDBModel>();
-            ProductData products = new ProductData(_config);
             decimal taxRate = ConfigHelper.GetTaxRate();
 
             foreach (var product in saleInfo.SaleDetails)
@@ -35,7 +36,7 @@ namespace DataManager.Library.DataAccess
                 };
 
                 //get info about this product
-                var productInfo = products.GetProductById(detail.ProductId);
+                var productInfo = _productData.GetProductById(detail.ProductId);
 
                 if (productInfo == null)
                 {
@@ -60,38 +61,33 @@ namespace DataManager.Library.DataAccess
             };
             sale.Total = sale.SubTotal + sale.Tax;
 
-            using (SqlDataAccess sql = new SqlDataAccess(_config))
+            try
             {
-                try
+                _sqlDataAccess.StartTransaction("AppData");
+
+                _sqlDataAccess.SaveDataInTransaction<SaleDBModel>("dbo.spSale_Insert", sale);
+
+                //Get Id from SaleModel
+                sale.Id = _sqlDataAccess.LoadDataInTransaction<int, dynamic>("dbo.spSaleIdLookup", new { CashierId = sale.CashierId, SaleDate = sale.SaleDate }).FirstOrDefault();
+
+                //Finish filling in the SaleDetailModel
+                foreach (var product in details)
                 {
-                    sql.StartTransaction("AppData");
-
-                    sql.SaveDataInTransaction<SaleDBModel>("dbo.spSale_Insert", sale);
-
-                    //Get Id from SaleModel
-                    sale.Id = sql.LoadDataInTransaction<int, dynamic>("dbo.spSaleIdLookup", new { CashierId = sale.CashierId, SaleDate = sale.SaleDate }).FirstOrDefault();
-
-                    //Finish filling in the SaleDetailModel
-                    foreach (var product in details)
-                    {
-                        product.SaleId = sale.Id;
-                        sql.SaveDataInTransaction<SaleDetailDBModel>("dbo.spSaleDetail_Insert", product);
-                    }
-
-                    sql.CommitTransaction(); //will be done anyway, but for safety
+                    product.SaleId = sale.Id;
+                    _sqlDataAccess.SaveDataInTransaction<SaleDetailDBModel>("dbo.spSaleDetail_Insert", product);
                 }
-                catch
-                {
-                    sql.RollbackTransaction();
-                    throw; //throws original exception
-                }
+
+                _sqlDataAccess.CommitTransaction(); //will be done anyway, but for safety
+            }
+            catch
+            {
+                _sqlDataAccess.RollbackTransaction();
+                throw; //throws original exception
             }
         }
         public List<SaleReportModel> GetSaleReport()
         {
-            SqlDataAccess sql = new SqlDataAccess(_config);
-
-            var output = sql.LoadData<SaleReportModel, dynamic>("dbo.spSale_SaleReport", new { }, "AppData");
+            var output = _sqlDataAccess.LoadData<SaleReportModel, dynamic>("dbo.spSale_SaleReport", new { }, "AppData");
 
             return output;
         }

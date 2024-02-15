@@ -15,6 +15,8 @@ using WebAPI.Data;
 using Microsoft.OpenApi.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using DataManager.Library.Internal.DataAccess;
+using DataManager.Library.DataAccess;
 
 namespace WebAPI
 {
@@ -38,6 +40,14 @@ namespace WebAPI
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddTransient<ISqlDataAccess, SqlDataAccess>();
+            services.AddTransient<IUserData, UserData>();
+            services.AddTransient<IInventoryData, InventoryData>();
+            services.AddTransient<IProductData, ProductData>();
+            services.AddTransient<ISaleData, SaleData>();
+
+
             services.AddAuthentication(auth =>                              //This is where we use token generated in TokenController to make sure we are authenticated
             {
                 auth.DefaultAuthenticateScheme = "JwtBearer";
