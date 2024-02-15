@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.34407.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataManager", "DataManager\DataManager.csproj", "{6AAC7298-7B03-44B8-8A05-E00F33815205}"
-EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "AppData", "AppData\AppData.sqlproj", "{57B511EB-4D67-4C58-B0D6-DCF9673D57D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopAppUI", "DesktopAppUI\DesktopAppUI.csproj", "{2314DE64-70CC-4039-BBBD-B673DDECDE48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesktopAppUI", "DesktopAppUI\DesktopAppUI.csproj", "{2314DE64-70CC-4039-BBBD-B673DDECDE48}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataManager.Library", "DataManager.Library\DataManager.Library.csproj", "{F1AADAA0-3041-491C-9D5A-EAE8316BE7D0}"
 EndProject
@@ -19,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{D6FB8708-7EB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{44F6C426-6AFC-4EA3-84DF-0F0B12BEE86D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{FA1B7604-94C9-4083-BE23-75D616FDBC70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csproj", "{FA1B7604-94C9-4083-BE23-75D616FDBC70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,10 +25,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6AAC7298-7B03-44B8-8A05-E00F33815205}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6AAC7298-7B03-44B8-8A05-E00F33815205}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6AAC7298-7B03-44B8-8A05-E00F33815205}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6AAC7298-7B03-44B8-8A05-E00F33815205}.Release|Any CPU.Build.0 = Release|Any CPU
 		{57B511EB-4D67-4C58-B0D6-DCF9673D57D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{57B511EB-4D67-4C58-B0D6-DCF9673D57D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57B511EB-4D67-4C58-B0D6-DCF9673D57D4}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
@@ -58,7 +52,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{6AAC7298-7B03-44B8-8A05-E00F33815205} = {D6FB8708-7EB1-40D7-AF61-E152E9351A8B}
 		{57B511EB-4D67-4C58-B0D6-DCF9673D57D4} = {E4AADCFD-CA36-4DA2-8400-7645819955AD}
 		{2314DE64-70CC-4039-BBBD-B673DDECDE48} = {44F6C426-6AFC-4EA3-84DF-0F0B12BEE86D}
 		{F1AADAA0-3041-491C-9D5A-EAE8316BE7D0} = {D6FB8708-7EB1-40D7-AF61-E152E9351A8B}
