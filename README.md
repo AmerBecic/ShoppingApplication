@@ -7,6 +7,8 @@ Previous version was built in .Net Framework, while this is that same project up
 
 This repository is moved to Azure DevOps - https://dev.azure.com/amerbecic999/ShoppingApplication
 
+API website: https://shoppingapplicationapi.azurewebsites.net/swagger/index.html
+
 ## Description
 
 Again this is a demo, with MVP bulding style. Main focus is on the functionalities of backend part of the application. <br/>
