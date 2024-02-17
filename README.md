@@ -5,7 +5,7 @@ This is .Net Core version of https://github.com/AmerBecic/ShoppingAppLegacy
 
 Previous version was built in .Net Framework, while this is that same project upgraded to .Net Core
 
-This repository is moved to Azure DevOps - https://dev.azure.com/amerbecic999/ShoppingApplication
+This repository is also on - https://dev.azure.com/amerbecic999/ShoppingApplication
 
 API website: https://shoppingapplicationapi.azurewebsites.net/swagger/index.html
 
